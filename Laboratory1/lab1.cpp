@@ -1,5 +1,6 @@
 #include <iostream>
 #include "lab1.h"
+
 using namespace std;
 unsigned long long  int factorial(unsigned long long int a) {
     if (a < 0) { return 0; }
@@ -73,8 +74,9 @@ void lab1_10() {
     
     
     
-        setlocale(LC_ALL, "Ukrainian_Ukraine.1251");
+       
         long b, n, p;
+        setlocale(LC_ALL, "Ukrainian_Ukraine.1251");
         cout << "Уведiть число,яке необхiдно перевiрити(n>0) ";
         cin >> n;
         cout << "Уведiть число,взаємнопросте з n ";
