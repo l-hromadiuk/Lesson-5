@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cmath>
+#include <cmath> 
 #include "lab2.h"
 using namespace std;
 double findCentreX(double x1, double x2, double x3) {
@@ -23,7 +23,7 @@ void rotationScaling(double x1, double x2, double x3, double y1, double y2, doub
 	cout << "Enter scaling factor : ";
 	cin >> sfactor;
 	angle = (angle * PI_2 / 90);
-	cout << "After rotation & saling: ";
+	cout << "After rotation & sсaling: " << endl;
 	x1_new = x_cent + (x1 - x_cent) * cos(angle) - (y1 - y_cent) * sin(angle);
 	x2_new = x_cent + (x2 - x_cent) * cos(angle) - (y2 - y_cent) * sin(angle);
 	x3_new = x_cent + (x3 - x_cent) * cos(angle) - (y3 - y_cent) * sin(angle);
@@ -53,4 +53,28 @@ void lab2_2() {
 	cout << "Centre(" << x_cent << ";" << y_cent << ")" << endl;
 	rotationScaling(x1, x2, x3, y1, y2, y3, x_cent, y_cent);
 
+}
+//Вважатимемо,що навколо заданого багатокутника однозначно можна описати коло//
+void lab2_14() {
+	int num;
+	cout << "Enter number of sides ";
+	cin >> num;
+	double* x = new double[num];
+	double* y = new double[num];
+	for (int i = 1; i <= num; i++) {
+		cout << "Enter vetrix ";
+		cin >> x[i] >> y[i];
+	}
+	for (int i = 1; i <= num; i++)
+	{
+		cout << "(" << x[i] << ";" << y[i] << ")" << endl;
+	}
+	double d1, d2, y_cent, x_cent, radius;
+	d1 = -((x[2] - x[1]) * ((x[1] + x[2]) / 2)) - ((y[2] - y[1]) * ((y[1] + y[2]) / 2));
+	d2 = -((x[3] - x[2]) * ((x[3] + x[2]) / 2)) - ((y[3] - y[2]) * ((y[3] + y[2]) / 2));
+	y_cent = ((d2 * (x[2] - x[1])) - (d1 * (x[3] - x[2]))) / (((y[2] - y[1]) * (x[3] - x[2])) - ((y[3] - y[2]) * (x[2] - x[1])));
+	x_cent = (-d1 - (y_cent * (y[2] - y[1]))) / (x[2] - x[1]);
+	cout << "Centre of circle (" << x_cent << ";" << y_cent << ")" << endl;
+	radius = sqrt((pow((x[1] - x_cent), 2)) + (pow((y[1] - y_cent), 2)));
+	cout << "R = " << radius << endl;
 }
