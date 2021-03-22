@@ -50,13 +50,14 @@ struct matrix {
 };
 
 
-void readFromfile(const char* file, const int rank, row* first) {
+void readFromfile(const char* file, const int rank, row* first, row* first_col) {
 	FILE* fp = fopen(file, "r+");
 	for (int i = 0; i < rank; i++) {
 		for (int j = 0; j < rank; j++) {
 			int value;
 			fread(&value, sizeof(int), 1, fp);
 			first[i].push(i, j, value);
+			first_col[j].push(i, j, value);
 		}
 	}
 
@@ -126,12 +127,12 @@ void dobutok(row* a, row* b, const int rank, row* m) {
 int main() {
 
 	const int rank = 5;
-	row first[rank], second[rank], summ[rank], mul[rank];
-	readFromfile("A.txt", rank, first);
+	row first[rank],first_col[rank], second[rank], second_col[rank], summ[rank], mul[rank];
+	readFromfile("A.txt", rank, first,first_col);
 	print(first, rank);
 	cout << endl;
-	readFromfile("B.txt", rank, second);
+	readFromfile("B.txt", rank, second,second_col);
 	print(second, rank);
 	sum(first, second, rank, summ);
-	dobutok(first, second, rank, mul);
+	dobutok(first, second_col, rank, mul);
 }
